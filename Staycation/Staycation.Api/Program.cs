@@ -31,5 +31,3 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
-
-// Testing if PR works
