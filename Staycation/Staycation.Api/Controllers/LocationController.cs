@@ -39,5 +39,16 @@ namespace Staycation.Api.Controllers
             }
             return Ok($"You have successfully updated location with id {id}"); 
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteLocationById (int id)
+        {
+            bool isSuccessfull = _locationService.DeleteLocationById(id);
+            if (!isSuccessfull)
+            {
+                return NotFound($"Location with id {id} does not exists");
+            }
+            return Ok($"You have successfully deleted location with id {id}");
+        }
     }
 }

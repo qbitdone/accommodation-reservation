@@ -39,5 +39,17 @@ namespace Staycation.Api.Services
             }
             return _location;
         }
+
+        public bool DeleteLocationById (int locationId)
+        {
+            var _location = _context.Locations.FirstOrDefault(n => n.Id == locationId);
+            if (_location != null)
+            {
+                _context.Locations.Remove(_location);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }
