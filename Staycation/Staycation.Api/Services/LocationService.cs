@@ -22,9 +22,15 @@ namespace Staycation.Api.Services
             _context.SaveChanges();
         }
 
-        public List<Location> GetAllLocations()
+        public List<LocationResponse> GetAllLocations()
         {
-            return _context.Locations.ToList();
+            var _allLocations = _context.Locations.Select(location => new LocationResponse()
+            {
+                Id = location.Id,
+                Name = location.Name,
+                PostalCode=location.PostalCode,
+            }).ToList();
+            return _allLocations;
         }
 
         public Location UpdateLocationById(int locationId, LocationViewModel location)
