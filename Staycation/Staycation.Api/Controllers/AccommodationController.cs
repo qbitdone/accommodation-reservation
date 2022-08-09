@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Staycation.Api.Data.Models;
 using Staycation.Api.Data.Services;
+using Staycation.Api.Models;
+using Staycation.Api.Services;
 
 namespace Staycation.Api.Controllers
 {
@@ -10,10 +12,12 @@ namespace Staycation.Api.Controllers
     public class AccommodationController : ControllerBase
     {
         public AccommodationService _accommodationService;
+        public LocationService _locationService;
 
-        public AccommodationController(AccommodationService accommodationService)
+        public AccommodationController(AccommodationService accommodationService, LocationService locationService)
         {
             _accommodationService = accommodationService;
+            _locationService = locationService; 
         }
 
         [HttpPost]
@@ -50,6 +54,13 @@ namespace Staycation.Api.Controllers
                 return NotFound($"Accommodation with id {id} does not exists"); // if accommodation is not found in database, return error code with message
             }
             return Ok($"You have successfully deleted accommodation with id {id}"); // if accommodation is deleted sucessfully, return Ok with message
+        }
+
+        [HttpPost("/location")]
+        public IActionResult AddLocation([FromBody] LocationViewModel location)
+        {
+            _locationService.AddLocation(location);
+            return Ok(location);
         }
     }
 }

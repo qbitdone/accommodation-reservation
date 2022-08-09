@@ -1,4 +1,5 @@
 ﻿using Staycation.Api.DatabaseContext;
+using Staycation.Api.Models;
 
 namespace Staycation.Api.Services
 {
@@ -8,6 +9,17 @@ namespace Staycation.Api.Services
         public LocationService (AppDbContext context)
         {
             _context = context;
+        }
+
+        public void AddLocation(LocationViewModel location)
+        {
+            var _location = new Location()
+            {
+                Name = location.Name,
+                PostalCode = location.PostalCode
+            };
+            _context.Locations.Add(_location);
+            _context.SaveChanges();
         }
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Staycation.Api.Data.Services;
 using Staycation.Api.DatabaseContext;
+using Staycation.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddTransient<AccommodationService>();
+builder.Services.AddTransient<LocationService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
