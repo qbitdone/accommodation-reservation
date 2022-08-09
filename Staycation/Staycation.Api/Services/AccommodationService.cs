@@ -1,5 +1,6 @@
 ﻿using Staycation.Api.Data.Models;
 using Staycation.Api.DatabaseContext;
+using Staycation.Api.Models;
 
 namespace Staycation.Api.Data.Services
 {
@@ -34,10 +35,27 @@ namespace Staycation.Api.Data.Services
 
         }
 
-        // This method returns list of all the accommodations from the database
-        public List<Accommodation> GetAllAccommodations()
+        public List<AccommodationResponse> GetAllAccommodations()
         {
-            return _context.Accommodations.ToList();
+            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationResponse()
+            {
+                Id = accommodation.Id,
+                Title = accommodation.Title,
+                Subtitle = accommodation.Subtitle,
+                Description = accommodation.Description,
+                Type = accommodation.Type,
+                Categorization = accommodation.Categorization,
+                PersonCount = accommodation.PersonCount,
+                ImageUrl = accommodation.ImageUrl,
+                FreeCancelation = accommodation.FreeCancelation,
+                Price = accommodation.Price,
+                Location = new LocationViewModel()
+                {
+                    Name = accommodation.Location.Name,
+                    PostalCode = accommodation.Location.PostalCode
+                }
+            }).ToList();
+            return _accommodations;
         }
 
         // This method updates the accommodation for given id and accommodation in the database

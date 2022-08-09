@@ -29,7 +29,7 @@ namespace Staycation.Api.Controllers
         [HttpGet]
         public IActionResult GetAllAccommodations()
         {
-            var allAccommodations = _accommodationService.GetAllAccommodations(); // get all accommodations from database
+            var allAccommodations = _accommodationService.GetAllAccommodationsv2(); // get all accommodations from database
             return Ok(allAccommodations); // returns Ok and list of all the accommodations from the database
         }
 
