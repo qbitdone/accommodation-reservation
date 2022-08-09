@@ -25,7 +25,8 @@ namespace Staycation.Api.Data.Services
                 PersonCount = accommodation.PersonCount,
                 ImageUrl = accommodation.ImageUrl,
                 FreeCancelation = accommodation.FreeCancelation,
-                Price = accommodation.Price
+                Price = accommodation.Price,
+                LocationId = accommodation.LocationId
             };
 
             _context.Accommodations.Add(_accommodation);
@@ -54,6 +55,7 @@ namespace Staycation.Api.Data.Services
                 _accommodation.ImageUrl = accommodation.ImageUrl;
                 _accommodation.FreeCancelation = accommodation.FreeCancelation;
                 _accommodation.Price = accommodation.Price;
+                _accommodation.LocationId = accommodation.LocationId;
 
                 _context.SaveChanges();
             }
