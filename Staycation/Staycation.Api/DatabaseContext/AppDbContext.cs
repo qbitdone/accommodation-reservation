@@ -10,7 +10,12 @@ namespace Staycation.Api.DatabaseContext
         {
 
         }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Location>()
+                .HasIndex(u => u.PostalCode)
+                .IsUnique();
+        }
         public DbSet<Accommodation> Accommodations { get; set; }
         public DbSet<Location> Locations { get; set; }
     }

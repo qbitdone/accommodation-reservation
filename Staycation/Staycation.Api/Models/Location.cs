@@ -8,6 +8,7 @@ namespace Staycation.Api.Models
         public int Id { get; set; }
         [MaxLength(150)]
         public string Name { get; set; }
+        
         public int PostalCode { get; set; }
 
         public List<Accommodation> Accommodations { get; set; }
