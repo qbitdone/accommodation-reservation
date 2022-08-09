@@ -26,5 +26,18 @@ namespace Staycation.Api.Services
         {
             return _context.Locations.ToList();
         }
+
+        public Location UpdateLocationById(int locationId, LocationViewModel location)
+        {
+            var _location = _context.Locations.FirstOrDefault(n => n.Id == locationId);
+            if (_location != null)
+            {
+                _location.Name = location.Name;
+                _location.PostalCode = location.PostalCode;
+
+                _context.SaveChanges();
+            }
+            return _location;
+        }
     }
 }

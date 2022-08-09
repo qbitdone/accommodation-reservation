@@ -28,5 +28,16 @@ namespace Staycation.Api.Controllers
          var _allLocations = _locationService.GetAllLocations();
          return Ok(_allLocations);
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateLocationById(int id, [FromBody] LocationViewModel location)
+        {
+            var updatedLocation = _locationService.UpdateLocationById(id, location);
+            if (updatedLocation == null)
+            {
+                return NotFound($"Location with id {id} does not exists");
+            }
+            return Ok($"You have successfully updated location with id {id}"); 
+        }
     }
 }
