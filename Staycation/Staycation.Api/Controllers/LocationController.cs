@@ -21,5 +21,12 @@ namespace Staycation.Api.Controllers
             _locationService.AddLocation(location);
             return Ok(location);
         }
+
+        [HttpGet]
+        public IActionResult GetAllLocations()
+        {
+         var _allLocations = _locationService.GetAllLocations();
+         return Ok(_allLocations);
+        }
     }
 }

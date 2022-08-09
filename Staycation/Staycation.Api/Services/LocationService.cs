@@ -21,5 +21,10 @@ namespace Staycation.Api.Services
             _context.Locations.Add(_location);
             _context.SaveChanges();
         }
+
+        public List<Location> GetAllLocations()
+        {
+            return _context.Locations.ToList();
+        }
     }
 }
