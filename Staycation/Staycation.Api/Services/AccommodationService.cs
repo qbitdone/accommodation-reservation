@@ -21,6 +21,7 @@ namespace Staycation.Api.Data.Services
                 Title = accommodation.Title,
                 Subtitle = accommodation.Subtitle,
                 Description = accommodation.Description,
+                Type = accommodation.Type,
                 Categorization = accommodation.Categorization,
                 PersonCount = accommodation.PersonCount,
                 ImageUrl = accommodation.ImageUrl,
@@ -42,6 +43,7 @@ namespace Staycation.Api.Data.Services
                 Title = accommodation.Title,
                 Subtitle = accommodation.Subtitle,
                 Description = accommodation.Description,
+                Type = accommodation.Type,
                 Categorization = accommodation.Categorization,
                 PersonCount = accommodation.PersonCount,
                 ImageUrl = accommodation.ImageUrl,
@@ -65,6 +67,7 @@ namespace Staycation.Api.Data.Services
                 _accommodation.Title = accommodation.Title;
                 _accommodation.Subtitle = accommodation.Subtitle;
                 _accommodation.Description = accommodation.Description;
+                _accommodation.Type = accommodation.Type;
                 _accommodation.Categorization = accommodation.Categorization;
                 _accommodation.PersonCount = accommodation.PersonCount;
                 _accommodation.ImageUrl = accommodation.ImageUrl;

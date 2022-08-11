@@ -10,6 +10,7 @@ namespace Staycation.Api.Data.Models
         [MaxLength(200)]
         public string Subtitle { get; set; }
         public string Description { get; set; }
+        public string Type { get; set; }
         [Required, Range(1, 5, ErrorMessage = "Value for Categorization must be between 1 and 5.")]
         public int Categorization { get; set; }
         [Range(1, 2147483647, ErrorMessage = "Person Count must 1 or higher.")]
