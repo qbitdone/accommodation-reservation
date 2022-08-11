@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Staycation.Api.Data.Models;
 using Staycation.Api.Data.Services;
+using Staycation.Api.Models;
+using Staycation.Api.Services;
 
 namespace Staycation.Api.Controllers
 {
@@ -11,7 +13,8 @@ namespace Staycation.Api.Controllers
     {
         public AccommodationService _accommodationService;
 
-        public AccommodationController(AccommodationService accommodationService)
+
+        public AccommodationController(AccommodationService accommodationService, LocationService locationService)
         {
             _accommodationService = accommodationService;
         }

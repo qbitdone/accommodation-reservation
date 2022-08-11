@@ -19,5 +19,6 @@ namespace Staycation.Api.Data.Models
         public bool FreeCancelation { get; set; } = true;
         [Required]
         public decimal Price { get; set; }
+        public int LocationId { get; set; }
     }
 }

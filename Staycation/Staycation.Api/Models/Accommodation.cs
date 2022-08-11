@@ -1,5 +1,6 @@
 ﻿
 using Newtonsoft.Json;
+using Staycation.Api.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -23,6 +24,9 @@ namespace Staycation.Api.Data.Models
         public bool FreeCancelation { get; set; } = true;
         [Required]
         public decimal Price { get; set; }
+
+        public int LocationId { get; set; }
+        public Location Location { get; set; }
 
         [System.Text.Json.Serialization.JsonConverter(typeof(JsonStringEnumConverter))]
         public enum AccommodationType { Room, Apartment, MobileHome }
