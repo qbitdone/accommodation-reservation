@@ -10,7 +10,7 @@ namespace Staycation.Api.Models
         public string ImageUrl { get; set; }
         [MaxLength(50)]
         public int PostalCode { get; set; }
-        [MaxLength(100)]
+        [Required, MaxLength(100)]
         public string Name { get; set; }
 
         public List<Accommodation> Accommodations { get; set; }
