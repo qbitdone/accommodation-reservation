@@ -61,5 +61,22 @@ namespace Staycation.Api.Services
 
             return _reservations;
         }
+
+        public Reservation UpdateReservationById(ReservationViewModel reservation, int reservationId)
+        {
+            var _reservation = _context.Reservations.FirstOrDefault(n => n.Id == reservationId);
+            if (_reservation != null)
+            {
+                _reservation.Email = reservation.Email;
+                _reservation.CheckIn = reservation.CheckIn;
+                _reservation.CheckOut = reservation.CheckOut;
+                _reservation.PersonCount = reservation.PersonCount;
+                _reservation.Confirmed = reservation.Confirmed;
+                _reservation.AccommodationId = reservation.AccommodationId;
+
+                _context.SaveChanges();
+            }
+            return _reservation;
+        }
     }
 }
