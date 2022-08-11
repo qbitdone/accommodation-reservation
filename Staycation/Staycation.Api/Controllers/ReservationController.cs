@@ -21,6 +21,13 @@ namespace Staycation.Api.Controllers
         {
             _reservationService.AddReservation(reservation);
             return Ok(reservation);
-        } 
+        }
+
+        [HttpGet]
+        public IActionResult GetAllReservations()
+        {
+            var _allReservations = _reservationService.GetAllReservations();
+            return Ok(_allReservations);
+        }
     }
 }

@@ -10,6 +10,6 @@ namespace Staycation.Api.Models
         public DateTime CheckOut { get; set; }
         public int PersonCount { get; set; }
         public bool Confirmed { get; set; }
-        public AccommodationViewModel Accommodation { get; set; }
+        public AccommodationResponse Accommodation { get; set; }
     }
 }
