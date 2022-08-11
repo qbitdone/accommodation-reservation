@@ -78,5 +78,17 @@ namespace Staycation.Api.Services
             }
             return _reservation;
         }
+
+        public bool DeleteReservationById(int reservationId)
+        {
+            var _reservation = _context.Reservations.FirstOrDefault(n => n.Id == reservationId);
+            if (_reservation != null)
+            {
+                _context.Reservations.Remove(_reservation);
+                _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

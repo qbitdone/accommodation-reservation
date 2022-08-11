@@ -40,5 +40,16 @@ namespace Staycation.Api.Controllers
             }
             return Ok($"You have successfully updated reservation with id {id}");
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteLocationById(int id)
+        {
+            bool isSuccessfull = _reservationService.DeleteReservationById(id);
+            if (!isSuccessfull)
+            {
+                return NotFound($"Reservation with id {id} does not exists");
+            }
+            return Ok($"You have successfully deleted reservation with id {id}");
+        }
     }
 }
