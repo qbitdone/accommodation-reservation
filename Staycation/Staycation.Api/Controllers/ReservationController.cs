@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Staycation.Api.Models;
 using Staycation.Api.Services;
 
@@ -14,6 +15,12 @@ namespace Staycation.Api.Controllers
         {
             _reservationService = reservationService;
         }
-        
+
+        [HttpPost]
+        public IActionResult AddReservation([FromBody] ReservationViewModel reservation)
+        {
+            _reservationService.AddReservation(reservation);
+            return Ok(reservation);
+        } 
     }
 }

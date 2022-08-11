@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddTransient<AccommodationService>();
 builder.Services.AddTransient<LocationService>();
+builder.Services.AddTransient<ReservationService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
