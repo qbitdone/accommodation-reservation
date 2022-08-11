@@ -16,7 +16,8 @@ namespace Staycation.Api.Services
             var _location = new Location()
             {
                 Name = location.Name,
-                PostalCode = location.PostalCode
+                PostalCode = location.PostalCode,
+                ImageUrl = location.ImageUrl
             };
             _context.Locations.Add(_location);
             _context.SaveChanges();
@@ -29,6 +30,7 @@ namespace Staycation.Api.Services
                 Id = location.Id,
                 Name = location.Name,
                 PostalCode=location.PostalCode,
+                ImageUrl = location.ImageUrl
             }).ToList();
             return _allLocations;
         }
@@ -40,6 +42,7 @@ namespace Staycation.Api.Services
             {
                 _location.Name = location.Name;
                 _location.PostalCode = location.PostalCode;
+                _location.ImageUrl = location.ImageUrl;
 
                 _context.SaveChanges();
             }
