@@ -11,7 +11,6 @@ namespace Staycation.Api.Models
         [MaxLength(50)]
         public int PostalCode { get; set; }
         [MaxLength(100)]
-        [Required]
         public string Name { get; set; }
 
         public List<Accommodation> Accommodations { get; set; }
