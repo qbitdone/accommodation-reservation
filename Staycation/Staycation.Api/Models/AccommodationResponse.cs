@@ -8,7 +8,6 @@ namespace Staycation.Api.Models
         public string Title { get; set; }
         public string Subtitle { get; set; }
         public string Description { get; set; }
-        public AccommodationType Type { get; set; }
         public int Categorization { get; set; }
         public int PersonCount { get; set; }
         public string ImageUrl { get; set; }

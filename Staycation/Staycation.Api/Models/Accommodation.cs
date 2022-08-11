@@ -31,6 +31,8 @@ namespace Staycation.Api.Data.Models
         public int LocationId { get; set; }
         public Location Location { get; set; }
 
+        public List<Reservation> Reservations { get; set; }
+
         public override bool Equals(object? obj)
         {
             return obj is Accommodation accommodation &&
