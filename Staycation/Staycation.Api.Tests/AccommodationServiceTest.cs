@@ -17,6 +17,7 @@ namespace Staycation.Api.Tests
 
         AccommodationService accommodationService;
         LocationService locationService;
+        ReservationService reservationService;
 
         [OneTimeSetUp]
         public void Setup()
@@ -26,9 +27,11 @@ namespace Staycation.Api.Tests
 
             InsertAccommodations();
             InsertLocations();
+            InsertReservations();
 
             accommodationService = new AccommodationService(context);
             locationService = new LocationService(context);
+            reservationService = new ReservationService(context);
         }
 
         [OneTimeTearDown]
@@ -37,7 +40,7 @@ namespace Staycation.Api.Tests
             context.Database.EnsureDeleted();
         }
 
-        [Test]
+        [Test, Order(1)]
         public void GetAllAccommodations()
         {
             var accommodations = accommodationService.GetAllAccommodations();
@@ -45,10 +48,17 @@ namespace Staycation.Api.Tests
             Assert.AreEqual(3, accommodations.Count);
         }
 
-        [Test]
+        [Test, Order(2)]
         public void GetAllLocations()
         {
             var locations = locationService.GetAllLocations();
+            Assert.AreEqual(3, locations.Count);
+        }
+
+        [Test, Order(3)]
+        public void GetAllReservations()
+        {
+            var locations = reservationService.GetAllReservations();
             Assert.AreEqual(3, locations.Count);
         }
         private void InsertAccommodations()
@@ -130,6 +140,46 @@ namespace Staycation.Api.Tests
             };
 
             context.Locations.AddRange(locations);
+            context.SaveChanges();
+        }
+
+        private void InsertReservations()
+        {
+            var reservations = new List<Reservation>()
+            {
+                new Reservation()
+                {
+                    Id = 1,
+                    Email = "first@email.com",
+                    CheckIn = DateTime.Now,
+                    CheckOut = DateTime.Now,
+                    PersonCount = 5,
+                    Confirmed = false,
+                    AccommodationId = 1
+                },
+                new Reservation()
+                {
+                    Id = 2,
+                    Email = "second@email.com",
+                    CheckIn = DateTime.Now,
+                    CheckOut = DateTime.Now,
+                    PersonCount = 5,
+                    Confirmed = false,
+                    AccommodationId = 2
+                },
+                new Reservation()
+                {
+                    Id = 3,
+                    Email = "third@email.com",
+                    CheckIn = DateTime.Now,
+                    CheckOut = DateTime.Now,
+                    PersonCount = 5,
+                    Confirmed = false,
+                    AccommodationId = 3
+                }
+            };
+
+            context.Reservations.AddRange(reservations);
             context.SaveChanges();
         }
     }
