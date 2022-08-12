@@ -1,23 +1,57 @@
 # Accommodation Reservation System
 
-This is a simple .NET Core 6 application for managing accommodations. The goal was to implement Accommodation resource RESTful API over HTTP on the path: /api/accommodation
+This is .NET Core 6 application for managing accommodations, reservations and locations.
 
-### Properties of Accommodation model:
-    - Title (String, max 100 characters)
-    - Subtitle (String, max 200 characters)
+### Models 
+## Accommodation:
+    - Id (Integer)
+    - Title (String)
+    - Subtitle (String)
     - Description (String)
-    - Type - one of the accommodation types (Room, Apartment, Mobile home)
-    - Categorization (Integer 1-5 - mandatory)
-    - PersonCount (Integer, min 1)
-    - ImageUrl
-    - FreeCancelation (boolean, default true)
-    - Price (decimal, mandatory)
+    - Type (String)
+    - Categorization (Integer)
+    - PersonCount (Integer)
+    - ImageUrl (String)
+    - FreeCancelation (boolean)
+    - Price (decimal)
+    - LocationId (integer)
+
+## Location
+    - Id (Integer)
+    - Name (String)
+    - Postal Code (String)
+    - ImageUrl (String)
+   
+## Reservation
+    - Id (Integer)
+    - Email (String)
+    - CheckIn (Date)
+    - CheckOut (Date)
+    - PersonCount (Integer)
+    - Confirmed (boolean)
+    - AccommodationId (Integer)
 
 ### Functionality:
+## Accommodation endpoint
   - Get all accommodations from the database
   - Insert new accommodation in the database
   - Update already existing accommodation in the database
   - Delete accommodation from the database
+  - Get accommodation recommendations
+  - Get all accommodations for provided location
+  
+## Location endpoint
+  - Get all locations from the database
+  - Insert new location in the database
+  - Update already existing location in the database
+  - Delete location from the database
+  
+## Reservation endpoint
+  - Get all reservations from the database
+  - Insert new reservation in the database
+  - Update already existing reservation in the database
+  - Delete reservation from the database
+ 
 
 
 ### Usage
