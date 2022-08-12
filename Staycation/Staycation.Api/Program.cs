@@ -1,9 +1,17 @@
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 using Staycation.Api.Data.Services;
 using Staycation.Api.DatabaseContext;
 using Staycation.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+// Add logging
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 // Add services to the container.
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnectionString");
