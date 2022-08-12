@@ -51,10 +51,12 @@ namespace Staycation.Api.Services
                     ImageUrl = reservation.Accommodation.ImageUrl,
                     FreeCancelation = reservation.Accommodation.FreeCancelation,
                     Price = reservation.Accommodation.Price,
-                    Location = new LocationViewModel()
+                    Location = new LocationResponse()
                     {
+                        Id = reservation.Accommodation.Location.Id,
                         Name = reservation.Accommodation.Location.Name,
-                        PostalCode = reservation.Accommodation.Location.PostalCode
+                        PostalCode = reservation.Accommodation.Location.PostalCode,
+                        ImageUrl = reservation.Accommodation.Location.ImageUrl
                     }
                 }
             }).ToList();

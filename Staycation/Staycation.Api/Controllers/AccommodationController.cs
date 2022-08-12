@@ -65,5 +65,16 @@ namespace Staycation.Api.Controllers
             }
             return NotFound();
         }
+
+        [HttpGet("location{locationId}")]
+        public IActionResult GetAllAccommodationsForLocation(int locationId)
+        {
+            var accommodationRecommenation = _accommodationService.GetAllAccommodationsForLocation(locationId);
+            if (accommodationRecommenation != null)
+            {
+                return Ok(accommodationRecommenation);
+            }
+            return NotFound();
+        }
     }
 }

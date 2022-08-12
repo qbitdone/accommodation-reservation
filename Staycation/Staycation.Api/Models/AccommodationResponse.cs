@@ -14,6 +14,6 @@ namespace Staycation.Api.Models
         public string ImageUrl { get; set; }
         public bool FreeCancelation { get; set; } = true;
         public decimal Price { get; set; }
-        public LocationViewModel Location { get; set; }
+        public LocationResponse Location { get; set; }
     }
 }

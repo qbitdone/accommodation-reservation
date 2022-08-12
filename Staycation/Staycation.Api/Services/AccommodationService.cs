@@ -49,10 +49,12 @@ namespace Staycation.Api.Data.Services
                 ImageUrl = accommodation.ImageUrl,
                 FreeCancelation = accommodation.FreeCancelation,
                 Price = accommodation.Price,
-                Location = new LocationViewModel()
+                Location = new LocationResponse()
                 {
+                    Id = accommodation.Location.Id,
                     Name = accommodation.Location.Name,
-                    PostalCode = accommodation.Location.PostalCode
+                    PostalCode = accommodation.Location.PostalCode,
+                    ImageUrl = accommodation.Location.ImageUrl
                 }
             }).ToList();
             return _accommodations;
@@ -107,12 +109,40 @@ namespace Staycation.Api.Data.Services
                 ImageUrl = accommodation.ImageUrl,
                 FreeCancelation = accommodation.FreeCancelation,
                 Price = accommodation.Price,
-                Location = new LocationViewModel()
+                Location = new LocationResponse()
                 {
+                    Id = accommodation.Location.Id,
                     Name = accommodation.Location.Name,
-                    PostalCode = accommodation.Location.PostalCode
+                    PostalCode = accommodation.Location.PostalCode,
+                    ImageUrl = accommodation.Location.ImageUrl
                 }
             }).ToList().OrderBy(arg => Guid.NewGuid()).Take(10).ToList();
+        }
+
+        public List<AccommodationResponse> GetAllAccommodationsForLocation(int locationId)
+        {
+            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationResponse()
+            {
+                Id = accommodation.Id,
+                Title = accommodation.Title,
+                Subtitle = accommodation.Subtitle,
+                Description = accommodation.Description,
+                Type = accommodation.Type,
+                Categorization = accommodation.Categorization,
+                PersonCount = accommodation.PersonCount,
+                ImageUrl = accommodation.ImageUrl,
+                FreeCancelation = accommodation.FreeCancelation,
+                Price = accommodation.Price,
+                Location = new LocationResponse()
+                {
+                    Id = accommodation.Location.Id,
+                    Name = accommodation.Location.Name,
+                    PostalCode = accommodation.Location.PostalCode,
+                    ImageUrl = accommodation.Location.ImageUrl
+                }
+            }).ToList().Where(n => n.Location.Id == locationId).ToList();
+
+            return _accommodations;
         }
     }
 }
