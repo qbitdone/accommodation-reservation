@@ -59,7 +59,11 @@ namespace Staycation.Api.Controllers
         public IActionResult GetAccommodationRecommedation()
         {
             var accommodationRecommenation = _accommodationService.GetAccommodationRecommedation();
-            return Ok(accommodationRecommenation); 
+            if (accommodationRecommenation != null)
+            {
+                return Ok(accommodationRecommenation);
+            }
+            return NotFound();
         }
     }
 }
