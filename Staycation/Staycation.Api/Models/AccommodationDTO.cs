@@ -2,7 +2,7 @@
 
 namespace Staycation.Api.Models
 {
-    public class AccommodationResponse
+    public class AccommodationDTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -14,6 +14,6 @@ namespace Staycation.Api.Models
         public string ImageUrl { get; set; }
         public bool FreeCancelation { get; set; } = true;
         public decimal Price { get; set; }
-        public LocationResponse Location { get; set; }
+        public LocationDTO Location { get; set; }
     }
 }

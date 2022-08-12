@@ -35,9 +35,9 @@ namespace Staycation.Api.Data.Services
 
         }
 
-        public List<AccommodationResponse> GetAllAccommodations()
+        public List<AccommodationDTO> GetAllAccommodations()
         {
-            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationResponse()
+            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationDTO()
             {
                 Id = accommodation.Id,
                 Title = accommodation.Title,
@@ -49,7 +49,7 @@ namespace Staycation.Api.Data.Services
                 ImageUrl = accommodation.ImageUrl,
                 FreeCancelation = accommodation.FreeCancelation,
                 Price = accommodation.Price,
-                Location = new LocationResponse()
+                Location = new LocationDTO()
                 {
                     Id = accommodation.Location.Id,
                     Name = accommodation.Location.Name,
@@ -95,9 +95,9 @@ namespace Staycation.Api.Data.Services
             return false;
         }
 
-        public List<AccommodationResponse> GetAccommodationRecommedation()
+        public List<AccommodationDTO> GetAccommodationRecommedation()
         {
-            return _context.Accommodations.Select(accommodation => new AccommodationResponse()
+            return _context.Accommodations.Select(accommodation => new AccommodationDTO()
             {
                 Id = accommodation.Id,
                 Title = accommodation.Title,
@@ -109,7 +109,7 @@ namespace Staycation.Api.Data.Services
                 ImageUrl = accommodation.ImageUrl,
                 FreeCancelation = accommodation.FreeCancelation,
                 Price = accommodation.Price,
-                Location = new LocationResponse()
+                Location = new LocationDTO()
                 {
                     Id = accommodation.Location.Id,
                     Name = accommodation.Location.Name,
@@ -119,9 +119,9 @@ namespace Staycation.Api.Data.Services
             }).ToList().OrderBy(arg => Guid.NewGuid()).Take(10).ToList();
         }
 
-        public List<AccommodationResponse> GetAllAccommodationsForLocation(int locationId)
+        public List<AccommodationDTO> GetAllAccommodationsForLocation(int locationId)
         {
-            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationResponse()
+            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationDTO()
             {
                 Id = accommodation.Id,
                 Title = accommodation.Title,
@@ -133,7 +133,7 @@ namespace Staycation.Api.Data.Services
                 ImageUrl = accommodation.ImageUrl,
                 FreeCancelation = accommodation.FreeCancelation,
                 Price = accommodation.Price,
-                Location = new LocationResponse()
+                Location = new LocationDTO()
                 {
                     Id = accommodation.Location.Id,
                     Name = accommodation.Location.Name,

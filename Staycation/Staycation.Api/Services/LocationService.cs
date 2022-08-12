@@ -23,9 +23,9 @@ namespace Staycation.Api.Services
             _context.SaveChanges();
         }
 
-        public List<LocationResponse> GetAllLocations()
+        public List<LocationDTO> GetAllLocations()
         {
-            var _allLocations = _context.Locations.Select(location => new LocationResponse()
+            var _allLocations = _context.Locations.Select(location => new LocationDTO()
             {
                 Id = location.Id,
                 Name = location.Name,

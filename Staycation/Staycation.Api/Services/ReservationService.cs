@@ -29,9 +29,9 @@ namespace Staycation.Api.Services
             _context.SaveChanges();
         }
 
-        public List<ReservationResponse> GetAllReservations()
+        public List<ReservationDTO> GetAllReservations()
         {
-            var _reservations = _context.Reservations.Select(reservation => new ReservationResponse()
+            var _reservations = _context.Reservations.Select(reservation => new ReservationDTO()
             {
                 Id = reservation.Id,
                 Email = reservation.Email,
@@ -39,7 +39,7 @@ namespace Staycation.Api.Services
                 CheckOut = reservation.CheckOut,
                 PersonCount = reservation.PersonCount,
                 Confirmed = reservation.Confirmed,
-                Accommodation = new AccommodationResponse()
+                Accommodation = new AccommodationDTO()
                 {
                     Id = reservation.Accommodation.Id,
                     Title = reservation.Accommodation.Title,
@@ -51,7 +51,7 @@ namespace Staycation.Api.Services
                     ImageUrl = reservation.Accommodation.ImageUrl,
                     FreeCancelation = reservation.Accommodation.FreeCancelation,
                     Price = reservation.Accommodation.Price,
-                    Location = new LocationResponse()
+                    Location = new LocationDTO()
                     {
                         Id = reservation.Accommodation.Location.Id,
                         Name = reservation.Accommodation.Location.Name,
