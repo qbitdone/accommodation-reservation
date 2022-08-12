@@ -37,27 +37,7 @@ namespace Staycation.Api.Data.Services
 
         public List<AccommodationDTO> GetAllAccommodations()
         {
-            var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationDTO()
-            {
-                Id = accommodation.Id,
-                Title = accommodation.Title,
-                Subtitle = accommodation.Subtitle,
-                Description = accommodation.Description,
-                Type = accommodation.Type,
-                Categorization = accommodation.Categorization,
-                PersonCount = accommodation.PersonCount,
-                ImageUrl = accommodation.ImageUrl,
-                FreeCancelation = accommodation.FreeCancelation,
-                Price = accommodation.Price,
-                Location = new LocationDTO()
-                {
-                    Id = accommodation.Location.Id,
-                    Name = accommodation.Location.Name,
-                    PostalCode = accommodation.Location.PostalCode,
-                    ImageUrl = accommodation.Location.ImageUrl
-                }
-            }).ToList();
-            return _accommodations;
+            return GetConvertAccommodationToAccommodationDTO();
         }
 
         // This method updates the accommodation for given id and accommodation in the database
@@ -97,29 +77,15 @@ namespace Staycation.Api.Data.Services
 
         public List<AccommodationDTO> GetAccommodationRecommedation()
         {
-            return _context.Accommodations.Select(accommodation => new AccommodationDTO()
-            {
-                Id = accommodation.Id,
-                Title = accommodation.Title,
-                Subtitle = accommodation.Subtitle,
-                Description = accommodation.Description,
-                Type = accommodation.Type,
-                Categorization = accommodation.Categorization,
-                PersonCount = accommodation.PersonCount,
-                ImageUrl = accommodation.ImageUrl,
-                FreeCancelation = accommodation.FreeCancelation,
-                Price = accommodation.Price,
-                Location = new LocationDTO()
-                {
-                    Id = accommodation.Location.Id,
-                    Name = accommodation.Location.Name,
-                    PostalCode = accommodation.Location.PostalCode,
-                    ImageUrl = accommodation.Location.ImageUrl
-                }
-            }).ToList().OrderBy(arg => Guid.NewGuid()).Take(10).ToList();
+            return GetConvertAccommodationToAccommodationDTO().OrderBy(arg => Guid.NewGuid()).Take(10).ToList();
         }
 
         public List<AccommodationDTO> GetAllAccommodationsForLocation(int locationId)
+        {
+            return GetConvertAccommodationToAccommodationDTO().Where(n => n.Location.Id == locationId).ToList();
+        }
+
+        public List<AccommodationDTO> GetConvertAccommodationToAccommodationDTO()
         {
             var _accommodations = _context.Accommodations.Select(accommodation => new AccommodationDTO()
             {
@@ -140,7 +106,7 @@ namespace Staycation.Api.Data.Services
                     PostalCode = accommodation.Location.PostalCode,
                     ImageUrl = accommodation.Location.ImageUrl
                 }
-            }).ToList().Where(n => n.Location.Id == locationId).ToList();
+            }).ToList();
 
             return _accommodations;
         }
