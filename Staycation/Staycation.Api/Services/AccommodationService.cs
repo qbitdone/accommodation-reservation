@@ -92,5 +92,27 @@ namespace Staycation.Api.Data.Services
             }
             return false;
         }
+
+        public List<AccommodationResponse> GetAccommodationRecommedation()
+        {
+            return _context.Accommodations.Select(accommodation => new AccommodationResponse()
+            {
+                Id = accommodation.Id,
+                Title = accommodation.Title,
+                Subtitle = accommodation.Subtitle,
+                Description = accommodation.Description,
+                Type = accommodation.Type,
+                Categorization = accommodation.Categorization,
+                PersonCount = accommodation.PersonCount,
+                ImageUrl = accommodation.ImageUrl,
+                FreeCancelation = accommodation.FreeCancelation,
+                Price = accommodation.Price,
+                Location = new LocationViewModel()
+                {
+                    Name = accommodation.Location.Name,
+                    PostalCode = accommodation.Location.PostalCode
+                }
+            }).ToList().OrderBy(arg => Guid.NewGuid()).Take(10).ToList();
+        }
     }
 }

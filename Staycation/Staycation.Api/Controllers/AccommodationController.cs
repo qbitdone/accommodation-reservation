@@ -54,5 +54,12 @@ namespace Staycation.Api.Controllers
             }
             return Ok($"You have successfully deleted accommodation with id {id}"); // if accommodation is deleted sucessfully, return Ok with message
         }
+
+        [HttpGet("recommedation")]
+        public IActionResult GetAccommodationRecommedation()
+        {
+            var accommodationRecommenation = _accommodationService.GetAccommodationRecommedation();
+            return Ok(accommodationRecommenation); 
+        }
     }
 }
