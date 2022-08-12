@@ -61,6 +61,14 @@ namespace Staycation.Api.Tests
             var locations = reservationService.GetAllReservations();
             Assert.AreEqual(3, locations.Count);
         }
+
+        [Test, Order(4)]
+        public void GetAllAccommodationsForLocation()
+        {
+            var accommodations = accommodationService.GetAllAccommodationsForLocation(1);
+            Assert.AreEqual(2, accommodations.Count);
+        }
+
         private void InsertAccommodations()
         {
             var accommodations = new List<Accommodation>
@@ -105,7 +113,7 @@ namespace Staycation.Api.Tests
                     ImageUrl = "http",
                     FreeCancelation = false,
                     Price = 5,
-                    LocationId = 1
+                    LocationId = 2
                 }
             };
             context.Accommodations.AddRange(accommodations);
