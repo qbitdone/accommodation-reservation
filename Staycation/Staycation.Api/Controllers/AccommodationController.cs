@@ -59,22 +59,22 @@ namespace Staycation.Api.Controllers
         public IActionResult GetAccommodationRecommedation()
         {
             var accommodationRecommenation = _accommodationService.GetAccommodationRecommedation();
-            if (accommodationRecommenation != null)
+            if (accommodationRecommenation == null || (!accommodationRecommenation.Any()))
             {
-                return Ok(accommodationRecommenation);
+                return NotFound();
             }
-            return NotFound();
+            return Ok(accommodationRecommenation);
         }
 
         [HttpGet("location{locationId}")]
         public IActionResult GetAllAccommodationsForLocation(int locationId)
         {
-            var accommodationRecommenation = _accommodationService.GetAllAccommodationsForLocation(locationId);
-            if (accommodationRecommenation != null)
+            var accommodationsByLocation = _accommodationService.GetAllAccommodationsForLocation(locationId);
+            if (accommodationsByLocation == null || (!accommodationsByLocation.Any()))
             {
-                return Ok(accommodationRecommenation);
+                return NotFound();
             }
-            return NotFound();
+            return Ok(accommodationsByLocation);
         }
     }
 }
