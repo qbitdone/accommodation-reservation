@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Staycation.Api.Exceptions;
 using Staycation.Api.Models;
 using Staycation.Api.Services;
 
@@ -23,6 +24,10 @@ namespace Staycation.Api.Controllers
             {
                 _reservationService.AddReservation(reservation);
                 return Created(nameof(AddReservation), reservation);
+            }
+            catch (ReservationNotPossibleException ex)
+            {
+                return BadRequest($"{ex.Message} AccommodationId: {ex.AccommodationId}");
             }
             catch (Exception ex)
             {
@@ -52,6 +57,10 @@ namespace Staycation.Api.Controllers
                     return NotFound($"Reservation with {id} does not exists");
                 }
                 return Accepted($"You have successfully updated reservation with id {id}");
+            }
+            catch (ReservationNotPossibleException ex)
+            {
+                return BadRequest($"{ex.Message} AccommodationId: {ex.AccommodationId}");
             }
             catch (Exception ex)
             {

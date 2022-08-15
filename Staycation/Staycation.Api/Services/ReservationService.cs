@@ -1,5 +1,6 @@
 ﻿using Staycation.Api.Data.Models;
 using Staycation.Api.DatabaseContext;
+using Staycation.Api.Exceptions;
 using Staycation.Api.Models;
 
 namespace Staycation.Api.Services
@@ -15,6 +16,10 @@ namespace Staycation.Api.Services
 
         public Reservation AddReservation(ReservationViewModel reservation)
         {
+            if (!AccommodationExists(reservation.AccommodationId))
+            {
+                throw new ReservationNotPossibleException("Accommodation with that id does not exists", reservation.AccommodationId);
+            }
                 var _reservation = new Reservation()
                 {
                     Email = reservation.Email,
@@ -68,6 +73,10 @@ namespace Staycation.Api.Services
 
         public bool UpdateReservationById(ReservationViewModel reservation, int reservationId)
         {
+            if (!AccommodationExists(reservation.AccommodationId))
+            {
+                throw new ReservationNotPossibleException("Accommodation with that id does not exists", reservation.AccommodationId);
+            }
             var _reservation = _context.Reservations.FirstOrDefault(n => n.Id == reservationId);
             if (_reservation != null)
             {
@@ -92,6 +101,16 @@ namespace Staycation.Api.Services
             {
                 _context.Reservations.Remove(_reservation);
                 _context.SaveChanges();
+                return true;
+            }
+            return false;
+        }
+
+        public bool AccommodationExists(int accommodationId)
+        {
+            var _accommodation = _context.Accommodations.FirstOrDefault(n => n.Id == accommodationId);
+            if (_accommodation != null)
+            {
                 return true;
             }
             return false;
