@@ -36,39 +36,31 @@ namespace Staycation.Api.Services
                 return _reservation;
         }
 
-        public List<ReservationDTO> GetAllReservations()
+        public List<ReservationDTO> GetAllReservations(string sortBy)
         {
-            var _reservations = _context.Reservations.Select(reservation => new ReservationDTO()
+            var allReservations = GetConvertReservationToReservationDTO();
+            if (!string.IsNullOrEmpty(sortBy))
             {
-                Id = reservation.Id,
-                Email = reservation.Email,
-                CheckIn = reservation.CheckIn,
-                CheckOut = reservation.CheckOut,
-                PersonCount = reservation.PersonCount,
-                Confirmed = reservation.Confirmed,
-                Accommodation = new AccommodationDTO()
+                switch (sortBy)
                 {
-                    Id = reservation.Accommodation.Id,
-                    Title = reservation.Accommodation.Title,
-                    Subtitle = reservation.Accommodation.Subtitle,
-                    Description = reservation.Accommodation.Description,
-                    Type = reservation.Accommodation.Type,
-                    Categorization = reservation.Accommodation.Categorization,
-                    PersonCount = reservation.Accommodation.PersonCount,
-                    ImageUrl = reservation.Accommodation.ImageUrl,
-                    FreeCancelation = reservation.Accommodation.FreeCancelation,
-                    Price = reservation.Accommodation.Price,
-                    Location = new LocationDTO()
-                    {
-                        Id = reservation.Accommodation.Location.Id,
-                        Name = reservation.Accommodation.Location.Name,
-                        PostalCode = reservation.Accommodation.Location.PostalCode,
-                        ImageUrl = reservation.Accommodation.Location.ImageUrl
-                    }
+                    case "email_desc":
+                        allReservations = allReservations.OrderByDescending(n => n.Email).ToList();
+                        break;
+                    case "email_acs":
+                        allReservations = allReservations.OrderBy(n => n.Email).ToList();
+                        break;
+                    case "check_in_desc":
+                        allReservations = allReservations.OrderByDescending(n => n.CheckIn).ToList();
+                        break;
+                    case "check_in_acs":
+                        allReservations = allReservations.OrderBy(n => n.CheckIn).ToList();
+                        break;
+                    default:
+                        break;
                 }
-            }).ToList();
-
-            return _reservations;
+            }
+            return allReservations;
+            
         }
 
         public bool UpdateReservationById(ReservationViewModel reservation, int reservationId)
@@ -114,6 +106,41 @@ namespace Staycation.Api.Services
                 return true;
             }
             return false;
+        }
+
+        public List<ReservationDTO> GetConvertReservationToReservationDTO()
+        {
+            var _reservations = _context.Reservations.Select(reservation => new ReservationDTO()
+            {
+                Id = reservation.Id,
+                Email = reservation.Email,
+                CheckIn = reservation.CheckIn,
+                CheckOut = reservation.CheckOut,
+                PersonCount = reservation.PersonCount,
+                Confirmed = reservation.Confirmed,
+                Accommodation = new AccommodationDTO()
+                {
+                    Id = reservation.Accommodation.Id,
+                    Title = reservation.Accommodation.Title,
+                    Subtitle = reservation.Accommodation.Subtitle,
+                    Description = reservation.Accommodation.Description,
+                    Type = reservation.Accommodation.Type,
+                    Categorization = reservation.Accommodation.Categorization,
+                    PersonCount = reservation.Accommodation.PersonCount,
+                    ImageUrl = reservation.Accommodation.ImageUrl,
+                    FreeCancelation = reservation.Accommodation.FreeCancelation,
+                    Price = reservation.Accommodation.Price,
+                    Location = new LocationDTO()
+                    {
+                        Id = reservation.Accommodation.Location.Id,
+                        Name = reservation.Accommodation.Location.Name,
+                        PostalCode = reservation.Accommodation.Location.PostalCode,
+                        ImageUrl = reservation.Accommodation.Location.ImageUrl
+                    }
+                }
+            }).ToList();
+
+            return _reservations;
         }
     }
 }
