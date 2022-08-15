@@ -38,12 +38,19 @@ namespace Staycation.Api.Controllers
         [HttpGet]
         public IActionResult GetAllReservations()
         {
-            var _allReservations = _reservationService.GetAllReservations();
-            if (_allReservations == null || (!_allReservations.Any()))
+            try
             {
-                return NotFound();
+                var _allReservations = _reservationService.GetAllReservations();
+                if (_allReservations == null || (!_allReservations.Any()))
+                {
+                    return NotFound();
+                }
+                return Ok(_allReservations);
             }
-            return Ok(_allReservations);
+            catch (Exception)
+            {
+                return BadRequest("Sorry we could not fetch the reservations");
+            }
         }
 
         [HttpPut("{id}")]

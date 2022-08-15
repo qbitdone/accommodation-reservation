@@ -13,7 +13,6 @@ namespace Staycation.Api.Controllers
     {
         public AccommodationService _accommodationService;
 
-
         public AccommodationController(AccommodationService accommodationService, LocationService locationService)
         {
             _accommodationService = accommodationService;
