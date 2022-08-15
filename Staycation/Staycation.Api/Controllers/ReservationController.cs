@@ -36,11 +36,11 @@ namespace Staycation.Api.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllReservations(string? sortBy)
+        public IActionResult GetAllReservations(string? sortBy, string? filterBy)
         {
             try
             {
-                var allReservations = _reservationService.GetAllReservations(sortBy);
+                var allReservations = _reservationService.GetAllReservations(sortBy, filterBy);
                 if (allReservations == null || (!allReservations.Any()))
                 {
                     return NotFound();

@@ -36,7 +36,7 @@ namespace Staycation.Api.Services
                 return _reservation;
         }
 
-        public List<ReservationDTO> GetAllReservations(string sortBy)
+        public List<ReservationDTO> GetAllReservations(string sortBy, string filterBy)
         {
             var allReservations = GetConvertReservationToReservationDTO();
             if (!string.IsNullOrEmpty(sortBy))
@@ -58,6 +58,10 @@ namespace Staycation.Api.Services
                     default:
                         break;
                 }
+            }
+            if (!string.IsNullOrEmpty(filterBy))
+            {
+                allReservations = allReservations.Where(n => n.Email.Contains(filterBy)).ToList();
             }
             return allReservations;
             
