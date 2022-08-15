@@ -2,6 +2,7 @@
 using Staycation.Api.DatabaseContext;
 using Staycation.Api.Exceptions;
 using Staycation.Api.Models;
+using Staycation.Api.Pagination;
 
 namespace Staycation.Api.Services
 {
@@ -36,9 +37,11 @@ namespace Staycation.Api.Services
                 return _reservation;
         }
 
-        public List<ReservationDTO> GetAllReservations(string sortBy, string filterBy)
+        public List<ReservationDTO> GetAllReservations(string sortBy, string filterBy, int? pageNumber)
         {
             var allReservations = GetConvertReservationToReservationDTO();
+
+            // Sorting
             if (!string.IsNullOrEmpty(sortBy))
             {
                 switch (sortBy)
@@ -59,10 +62,16 @@ namespace Staycation.Api.Services
                         break;
                 }
             }
+
+            // Filtering
             if (!string.IsNullOrEmpty(filterBy))
             {
                 allReservations = allReservations.Where(n => n.Email.Contains(filterBy)).ToList();
             }
+
+            // Paging
+            int pageSize = 5;
+            allReservations = PaginatedList<ReservationDTO>.Create(allReservations.AsQueryable(), pageNumber ?? 1, pageSize);
             return allReservations;
             
         }
