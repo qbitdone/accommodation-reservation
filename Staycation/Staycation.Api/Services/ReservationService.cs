@@ -13,20 +13,29 @@ namespace Staycation.Api.Services
             _context = context;
         }
 
-        public void AddReservation(ReservationViewModel reservation)
+        public bool AddReservation(ReservationViewModel reservation)
         {
-            var _reservation = new Reservation()
+            try
             {
-                Email = reservation.Email,
-                CheckIn = reservation.CheckIn,
-                CheckOut = reservation.CheckOut,
-                PersonCount = reservation.PersonCount,
-                Confirmed = reservation.Confirmed,
-                AccommodationId = reservation.AccommodationId
-            };
+                var _reservation = new Reservation()
+                {
+                    Email = reservation.Email,
+                    CheckIn = reservation.CheckIn,
+                    CheckOut = reservation.CheckOut,
+                    PersonCount = reservation.PersonCount,
+                    Confirmed = reservation.Confirmed,
+                    AccommodationId = reservation.AccommodationId
+                };
 
-            _context.Add(_reservation);
-            _context.SaveChanges();
+                _context.Add(_reservation);
+                _context.SaveChanges();
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public List<ReservationDTO> GetAllReservations()
@@ -64,7 +73,7 @@ namespace Staycation.Api.Services
             return _reservations;
         }
 
-        public Reservation UpdateReservationById(ReservationViewModel reservation, int reservationId)
+        public bool UpdateReservationById(ReservationViewModel reservation, int reservationId)
         {
             var _reservation = _context.Reservations.FirstOrDefault(n => n.Id == reservationId);
             if (_reservation != null)
@@ -77,8 +86,10 @@ namespace Staycation.Api.Services
                 _reservation.AccommodationId = reservation.AccommodationId;
 
                 _context.SaveChanges();
+
+                return true;
             }
-            return _reservation;
+            return false;
         }
 
         public bool DeleteReservationById(int reservationId)
