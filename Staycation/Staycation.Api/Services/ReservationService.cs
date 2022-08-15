@@ -13,10 +13,8 @@ namespace Staycation.Api.Services
             _context = context;
         }
 
-        public bool AddReservation(ReservationViewModel reservation)
+        public Reservation AddReservation(ReservationViewModel reservation)
         {
-            try
-            {
                 var _reservation = new Reservation()
                 {
                     Email = reservation.Email,
@@ -30,12 +28,7 @@ namespace Staycation.Api.Services
                 _context.Add(_reservation);
                 _context.SaveChanges();
 
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+                return _reservation;
         }
 
         public List<ReservationDTO> GetAllReservations()

@@ -19,12 +19,15 @@ namespace Staycation.Api.Controllers
         [HttpPost]
         public IActionResult AddReservation([FromBody] ReservationViewModel reservation)
         {
-            var isSucessfull = _reservationService.AddReservation(reservation);
-            if (!isSucessfull)
+            try
             {
-                return BadRequest(); 
+                _reservationService.AddReservation(reservation);
+                return Created(nameof(AddReservation), reservation);
             }
-            return Created(nameof(AddReservation), reservation);
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -41,12 +44,19 @@ namespace Staycation.Api.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateReservationById(int id, [FromBody] ReservationViewModel reservation)
         {
-            var isSuccessfull = _reservationService.UpdateReservationById(reservation, id);
-            if (!isSuccessfull)
+            try
             {
-                return NotFound($"Reservation with id {id} does not exists");
+                bool isSucessfull = _reservationService.UpdateReservationById(reservation, id);
+                if (!isSucessfull)
+                {
+                    return NotFound($"Reservation with {id} does not exists");
+                }
+                return Accepted($"You have successfully updated reservation with id {id}");
             }
-            return Accepted($"You have successfully updated reservation with id {id}");
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }        
         }
 
         [HttpDelete("{id}")]
