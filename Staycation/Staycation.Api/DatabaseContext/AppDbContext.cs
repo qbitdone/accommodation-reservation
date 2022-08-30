@@ -18,5 +18,6 @@ namespace Staycation.Api.DatabaseContext
         }
         public DbSet<Accommodation> Accommodations { get; set; }
         public DbSet<Location> Locations { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
     }
 }

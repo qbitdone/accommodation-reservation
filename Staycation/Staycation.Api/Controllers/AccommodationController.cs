@@ -13,7 +13,6 @@ namespace Staycation.Api.Controllers
     {
         public AccommodationService _accommodationService;
 
-
         public AccommodationController(AccommodationService accommodationService, LocationService locationService)
         {
             _accommodationService = accommodationService;
@@ -53,6 +52,28 @@ namespace Staycation.Api.Controllers
                 return NotFound($"Accommodation with id {id} does not exists"); // if accommodation is not found in database, return error code with message
             }
             return Ok($"You have successfully deleted accommodation with id {id}"); // if accommodation is deleted sucessfully, return Ok with message
+        }
+
+        [HttpGet("recommedation")]
+        public IActionResult GetAccommodationRecommedation()
+        {
+            var accommodationRecommenation = _accommodationService.GetAccommodationRecommedation();
+            if (accommodationRecommenation == null || (!accommodationRecommenation.Any()))
+            {
+                return NotFound();
+            }
+            return Ok(accommodationRecommenation);
+        }
+
+        [HttpGet("location{locationId}")]
+        public IActionResult GetAllAccommodationsForLocation(int locationId)
+        {
+            var accommodationsByLocation = _accommodationService.GetAllAccommodationsForLocation(locationId);
+            if (accommodationsByLocation == null || (!accommodationsByLocation.Any()))
+            {
+                return NotFound();
+            }
+            return Ok(accommodationsByLocation);
         }
     }
 }
