@@ -1,6 +1,6 @@
 # Accommodation Reservation System
 
-This is .NET Core 6 application for managing accommodations, reservations and locations.
+This is .NET Core 6 Web API for managing accommodations, reservations and locations.
 
 ### Models 
 ## Accommodation:
